@@ -1,14 +1,12 @@
 package uk.fergcb.sakila.actor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="actor")
 public class Actor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="actor_id")
     private int actorId;
 
@@ -18,19 +16,23 @@ public class Actor {
     @Column(name="last_name")
     private String lastName;
 
-    public Actor(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Actor(ActorDTO actorDTO) {
+        this.updateFromDTO(actorDTO);
     }
 
     public Actor() {}
+
+    public void updateFromDTO(ActorDTO actorDTO) {
+        this.firstName = actorDTO.getFirstName().orElse(firstName);
+        this.lastName = actorDTO.getLastName().orElse(lastName);
+    }
 
     public int getActorId() {
         return actorId;
     }
 
-    public void setActorId(int actor_id) {
-        this.actorId = actor_id;
+    public void setActorId(int actorId) {
+        this.actorId = actorId;
     }
 
     public String getFirstName() {
