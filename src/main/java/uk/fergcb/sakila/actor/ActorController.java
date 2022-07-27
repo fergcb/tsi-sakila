@@ -17,7 +17,10 @@ public class ActorController {
     }
 
     @GetMapping
-    public @ResponseBody Iterable<Actor> getActors() {
+    public @ResponseBody Iterable<Actor> getActorsByName(@RequestParam(name = "name", required = false) String name) {
+        if (name != null) {
+            return actorRepository.findByFullNameContainingIgnoreCase(name);
+        }
         return actorRepository.findAll();
     }
 

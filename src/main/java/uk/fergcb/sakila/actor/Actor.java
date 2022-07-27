@@ -1,5 +1,7 @@
 package uk.fergcb.sakila.actor;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,9 @@ public class Actor {
 
     @Column(name="last_name")
     private String lastName;
+
+    @Formula("concat(first_name, ' ', last_name)")
+    private String fullName;
 
     public Actor(ActorDTO actorDTO) {
         this.updateFromDTO(actorDTO);
@@ -49,5 +54,9 @@ public class Actor {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 }
