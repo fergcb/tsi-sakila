@@ -5,6 +5,7 @@ import uk.fergcb.sakila.language.Language;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name="film")
@@ -48,6 +49,13 @@ public class Film {
 
     @Column(name="special_features")
     private String specialFeatures;
+
+    @ManyToMany
+    @JoinTable(name="film_actor",
+            joinColumns = @JoinColumn(name="film_id"),
+            inverseJoinColumns = @JoinColumn(name="actor_id")
+    )
+    private List<FilmActor> cast;
 
     public Film(FilmDTO filmDTO) {
         this.updateFromDTO(filmDTO);
@@ -163,5 +171,13 @@ public class Film {
 
     public void setSpecialFeatures(String specialFeatures) {
         this.specialFeatures = specialFeatures;
+    }
+
+    public List<FilmActor> getCast() {
+        return cast;
+    }
+
+    public void setCast(List<FilmActor> cast) {
+        this.cast = cast;
     }
 }

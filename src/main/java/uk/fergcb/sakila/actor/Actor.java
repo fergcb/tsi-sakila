@@ -1,8 +1,10 @@
 package uk.fergcb.sakila.actor;
 
 import org.hibernate.annotations.Formula;
+import uk.fergcb.sakila.film.Film;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="actor")
@@ -20,6 +22,13 @@ public class Actor {
 
     @Formula("concat(first_name, ' ', last_name)")
     private String fullName;
+
+    @ManyToMany
+    @JoinTable(name="film_actor",
+        joinColumns = @JoinColumn(name="actor_id"),
+        inverseJoinColumns = @JoinColumn(name="film_id")
+    )
+    private List<ActorFilm> films;
 
     public Actor(ActorDTO actorDTO) {
         this.updateFromDTO(actorDTO);
@@ -58,5 +67,9 @@ public class Actor {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public List<ActorFilm> getFilms() {
+        return films;
     }
 }
