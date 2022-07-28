@@ -3,8 +3,17 @@ package uk.fergcb.sakila.actor;
 import java.util.Optional;
 
 public class ActorDTO {
+    private Integer actorId;
     private String firstName;
     private String lastName;
+
+    public Optional<Integer> getActorId() {
+        return Optional.ofNullable(actorId);
+    }
+
+    public void setActorId(Integer actorId) {
+        this.actorId = actorId;
+    }
 
     public Optional<String> getFirstName() {
         return Optional.ofNullable(firstName);

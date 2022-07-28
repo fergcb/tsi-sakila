@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.util.Optional;
 
 public class FilmDTO {
+    private Integer filmId;
     private String title;
     private String description;
     private Date releaseYear;
@@ -18,6 +19,14 @@ public class FilmDTO {
     private BigDecimal replacementCost;
     private String rating;
     private String specialFeatures;
+
+    public Optional<Integer> getFilmId() {
+        return Optional.ofNullable(filmId);
+    }
+
+    public void setFilmId(Integer filmId) {
+        this.filmId = filmId;
+    }
 
     public Optional<String> getTitle() {
         return Optional.ofNullable(title);
