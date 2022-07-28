@@ -34,14 +34,14 @@ public class ActorController {
     public @ResponseBody Actor getActorById(@PathVariable int id) {
         return actorRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No user exists with that id."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No actor exists with that id."));
     }
 
     @PatchMapping("/{id}")
     public @ResponseBody Actor updateActorById(@PathVariable int id, @RequestBody ActorDTO actorDTO) {
         Actor actor = actorRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No user exists with that id."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No actor exists with that id."));
         actor.updateFromDTO(actorDTO);
         return actorRepository.save(actor);
     }
