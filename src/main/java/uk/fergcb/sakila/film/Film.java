@@ -36,7 +36,7 @@ public class Film {
     @JoinColumn(name="original_language_id", insertable = false, updatable = false)
     private Language originalLanguage;
 
-    @Column(name="language_id")
+    @Column(name="original_language_id")
     private Integer originalLanguageId;
 
     @Column(name="rental_duration")
@@ -75,7 +75,7 @@ public class Film {
         this.description = filmDTO.getDescription().orElse(description);
         this.releaseYear = filmDTO.getReleaseYear().orElse(releaseYear);
         this.languageId = filmDTO.getLanguageId().orElse(languageId);
-        this.languageId = filmDTO.getLanguageId().orElse(languageId);
+        this.originalLanguageId = filmDTO.getOriginalLanguageId().orElse(originalLanguageId);
         this.rentalDuration = filmDTO.getRentalDuration().orElse(rentalDuration);
         this.rentalRate = filmDTO.getRentalRate().orElse(rentalRate);
         this.length = filmDTO.getLength().orElse(length);
