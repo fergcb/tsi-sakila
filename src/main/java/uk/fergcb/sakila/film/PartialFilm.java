@@ -1,11 +1,11 @@
-package uk.fergcb.sakila.actor;
+package uk.fergcb.sakila.film;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table(name="film")
-public class ActorFilm {
+public class PartialFilm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="film_id")
@@ -18,9 +18,9 @@ public class ActorFilm {
     private String description;
 
     @Column(name="release_year")
-    private Date releaseYear;
+    private Integer releaseYear;
 
-    public ActorFilm() {}
+    public PartialFilm() {}
 
     public int getFilmId() {
         return filmId;
@@ -46,11 +46,11 @@ public class ActorFilm {
         this.description = description;
     }
 
-    public Date getReleaseYear() {
+    public Integer getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(Date releaseYear) {
+    public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
     }
 }

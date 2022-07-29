@@ -1,4 +1,4 @@
-package uk.fergcb.sakila.film;
+package uk.fergcb.sakila.actor;
 
 import org.hibernate.annotations.Formula;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "actor")
-public class FilmActor {
+public class PartialActor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="actor_id")

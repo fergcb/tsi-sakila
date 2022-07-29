@@ -1,5 +1,6 @@
 package uk.fergcb.sakila.film;
 
+import uk.fergcb.sakila.actor.PartialActor;
 import uk.fergcb.sakila.category.Category;
 import uk.fergcb.sakila.language.Language;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name="film")
-public class Film {
+public class Film extends PartialFilm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="film_id")
@@ -61,7 +62,7 @@ public class Film {
             joinColumns = @JoinColumn(name="film_id"),
             inverseJoinColumns = @JoinColumn(name="actor_id")
     )
-    private List<FilmActor> cast;
+    private List<PartialActor> cast;
 
     @ManyToMany
     @JoinTable(name="film_category",
@@ -186,11 +187,11 @@ public class Film {
         this.specialFeatures = specialFeatures;
     }
 
-    public List<FilmActor> getCast() {
+    public List<PartialActor> getCast() {
         return cast;
     }
 
-    public void setCast(List<FilmActor> cast) {
+    public void setCast(List<PartialActor> cast) {
         this.cast = cast;
     }
 
