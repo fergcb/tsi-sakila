@@ -11,8 +11,8 @@ public class FilmDTO {
     private String title;
     private String description;
     private Date releaseYear;
-    private Language language;
-    private Language originalLanguage;
+    private String language;
+    private String originalLanguage;
     private Integer rentalDuration;
     private BigDecimal rentalRate;
     private Integer length;
@@ -52,19 +52,19 @@ public class FilmDTO {
         this.releaseYear = releaseYear;
     }
 
-    public Optional<Language> getLanguage() {
+    public Optional<String> getLanguage() {
         return Optional.ofNullable(language);
     }
 
-    public void setLanguage(Language language) {
+    public void setLanguage(String language) {
         this.language = language;
     }
 
-    public Optional<Language> getOriginalLanguage() {
+    public Optional<String> getOriginalLanguage() {
         return Optional.ofNullable(originalLanguage);
     }
 
-    public void setOriginalLanguage(Language originalLanguage) {
+    public void setOriginalLanguage(String originalLanguage) {
         this.originalLanguage = originalLanguage;
     }
 

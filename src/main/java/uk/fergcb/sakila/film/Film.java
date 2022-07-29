@@ -1,6 +1,7 @@
 package uk.fergcb.sakila.film;
 
 import uk.fergcb.sakila.language.Language;
+import uk.fergcb.sakila.language.LanguageRepository;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -57,24 +58,32 @@ public class Film {
     )
     private List<FilmActor> cast;
 
-    public Film(FilmDTO filmDTO) {
-        this.updateFromDTO(filmDTO);
+    public Film(FilmDTO filmDTO, LanguageRepository languageRepository) {
+        this.updateFromDTO(filmDTO, languageRepository);
     }
 
     public Film() {}
 
-    public void updateFromDTO(FilmDTO filmDTO) {
+    public void updateFromDTO(FilmDTO filmDTO, LanguageRepository languageRepository) {
         this.title = filmDTO.getTitle().orElse(title);
         this.description = filmDTO.getDescription().orElse(description);
         this.releaseYear = filmDTO.getReleaseYear().orElse(releaseYear);
-        this.language = filmDTO.getLanguage().orElse(language);
-        this.originalLanguage = filmDTO.getOriginalLanguage().orElse(originalLanguage);
         this.rentalDuration = filmDTO.getRentalDuration().orElse(rentalDuration);
         this.rentalRate = filmDTO.getRentalRate().orElse(rentalRate);
         this.length = filmDTO.getLength().orElse(length);
         this.replacementCost = filmDTO.getReplacementCost().orElse(replacementCost);
         this.rating = filmDTO.getRating().orElse(rating);
         this.specialFeatures = filmDTO.getSpecialFeatures().orElse(specialFeatures);
+
+        if (filmDTO.getLanguage().isPresent()) {
+            String languageName = filmDTO.getLanguage().get();
+            this.language = languageRepository.findByName(languageName);
+        }
+
+        if (filmDTO.getOriginalLanguage().isPresent()) {
+            String originalLanguageName = filmDTO.getOriginalLanguage().get();
+            this.originalLanguage = languageRepository.findByName(originalLanguageName);
+        }
     }
 
     public int getFilmId() {
