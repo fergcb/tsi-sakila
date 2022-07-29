@@ -1,7 +1,9 @@
 package uk.fergcb.sakila.film;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 public class FilmDTO {
     private Integer filmId;
@@ -16,6 +18,7 @@ public class FilmDTO {
     private BigDecimal replacementCost;
     private String rating;
     private String specialFeatures;
+    private Set<Integer> categoryIds;
 
     public Optional<Integer> getFilmId() {
         return Optional.ofNullable(filmId);
@@ -111,5 +114,13 @@ public class FilmDTO {
 
     public void setSpecialFeatures(String specialFeatures) {
         this.specialFeatures = specialFeatures;
+    }
+
+    public Set<Integer> getCategoryIds() {
+        return categoryIds == null ? new HashSet<>() : categoryIds;
+    }
+
+    public void setCategoryIds(Set<Integer> categoryIds) {
+        this.categoryIds = categoryIds;
     }
 }

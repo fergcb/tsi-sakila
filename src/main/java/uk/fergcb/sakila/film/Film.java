@@ -1,11 +1,10 @@
 package uk.fergcb.sakila.film;
 
+import uk.fergcb.sakila.category.Category;
 import uk.fergcb.sakila.language.Language;
-import uk.fergcb.sakila.language.LanguageRepository;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -63,6 +62,13 @@ public class Film {
             inverseJoinColumns = @JoinColumn(name="actor_id")
     )
     private List<FilmActor> cast;
+
+    @ManyToMany
+    @JoinTable(name="film_category",
+            joinColumns = @JoinColumn(name="film_id"),
+            inverseJoinColumns = @JoinColumn(name="category_id")
+    )
+    private List<Category> categories;
 
     public Film(FilmDTO filmDTO) {
         this.updateFromDTO(filmDTO);
@@ -186,5 +192,9 @@ public class Film {
 
     public void setCast(List<FilmActor> cast) {
         this.cast = cast;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
     }
 }

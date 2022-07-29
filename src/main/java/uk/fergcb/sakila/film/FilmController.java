@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import uk.fergcb.sakila.filmcategory.FilmCategory;
+import uk.fergcb.sakila.filmcategory.FilmCategoryRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/film")
@@ -11,16 +15,28 @@ public class FilmController {
 
     @Autowired
     private final FilmRepository filmRepository;
+    @Autowired
+    private final FilmCategoryRepository filmCategoryRepository;
 
-    public FilmController(FilmRepository filmRepository) {
+    public FilmController(FilmRepository filmRepository, FilmCategoryRepository filmCategoryRepository) {
         this.filmRepository = filmRepository;
+        this.filmCategoryRepository = filmCategoryRepository;
     }
 
 
     @PostMapping
     public @ResponseBody Film createFilm(@RequestBody FilmDTO filmDTO) {
-        Film film = new Film(filmDTO);
-        return filmRepository.save(film);
+        Film film = filmRepository.save(new Film(filmDTO));
+        Integer filmId = film.getFilmId();
+
+        List<FilmCategory> filmCategories = filmDTO.getCategoryIds()
+                .stream()
+                .map(categoryId ->  new FilmCategory(filmId, categoryId))
+                .toList();
+
+        filmCategoryRepository.saveAll(filmCategories);
+
+        return film;
     }
 
     @GetMapping
