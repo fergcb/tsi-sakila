@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = {"pretty"},
-        glue = ""
+        glue = "uk.fergcb.sakila"
 )
 public class RunCucumberTest{
 }
