@@ -1,7 +1,6 @@
 package uk.fergcb.sakila.actor;
 
 import org.hibernate.annotations.Formula;
-import uk.fergcb.sakila.film.Film;
 
 import javax.persistence.*;
 import java.util.List;
