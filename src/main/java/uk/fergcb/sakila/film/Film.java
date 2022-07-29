@@ -23,15 +23,21 @@ public class Film {
     private String description;
 
     @Column(name="release_year")
-    private Date releaseYear;
+    private Integer releaseYear;
 
     @ManyToOne
-    @JoinColumn(name="language_id", nullable=false)
+    @JoinColumn(name="language_id", nullable=false, insertable = false, updatable = false)
     private Language language;
 
+    @Column(name="language_id", nullable=false)
+    private Integer languageId;
+
     @ManyToOne
-    @JoinColumn(name="original_language_id")
+    @JoinColumn(name="original_language_id", insertable = false, updatable = false)
     private Language originalLanguage;
+
+    @Column(name="language_id")
+    private Integer originalLanguageId;
 
     @Column(name="rental_duration")
     private Integer rentalDuration;
@@ -58,32 +64,24 @@ public class Film {
     )
     private List<FilmActor> cast;
 
-    public Film(FilmDTO filmDTO, LanguageRepository languageRepository) {
-        this.updateFromDTO(filmDTO, languageRepository);
+    public Film(FilmDTO filmDTO) {
+        this.updateFromDTO(filmDTO);
     }
 
     public Film() {}
 
-    public void updateFromDTO(FilmDTO filmDTO, LanguageRepository languageRepository) {
+    public void updateFromDTO(FilmDTO filmDTO) {
         this.title = filmDTO.getTitle().orElse(title);
         this.description = filmDTO.getDescription().orElse(description);
         this.releaseYear = filmDTO.getReleaseYear().orElse(releaseYear);
+        this.languageId = filmDTO.getLanguageId().orElse(languageId);
+        this.languageId = filmDTO.getLanguageId().orElse(languageId);
         this.rentalDuration = filmDTO.getRentalDuration().orElse(rentalDuration);
         this.rentalRate = filmDTO.getRentalRate().orElse(rentalRate);
         this.length = filmDTO.getLength().orElse(length);
         this.replacementCost = filmDTO.getReplacementCost().orElse(replacementCost);
         this.rating = filmDTO.getRating().orElse(rating);
         this.specialFeatures = filmDTO.getSpecialFeatures().orElse(specialFeatures);
-
-        if (filmDTO.getLanguage().isPresent()) {
-            String languageName = filmDTO.getLanguage().get();
-            this.language = languageRepository.findByName(languageName);
-        }
-
-        if (filmDTO.getOriginalLanguage().isPresent()) {
-            String originalLanguageName = filmDTO.getOriginalLanguage().get();
-            this.originalLanguage = languageRepository.findByName(originalLanguageName);
-        }
     }
 
     public int getFilmId() {
@@ -110,11 +108,11 @@ public class Film {
         this.description = description;
     }
 
-    public Date getReleaseYear() {
+    public Integer getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(Date releaseYear) {
+    public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
     }
 
@@ -122,16 +120,16 @@ public class Film {
         return language;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
+    public void setLanguageId(Integer languageId) {
+        this.languageId = languageId;
     }
 
     public Language getOriginalLanguage() {
         return originalLanguage;
     }
 
-    public void setOriginalLanguage(Language originalLanguage) {
-        this.originalLanguage = originalLanguage;
+    public void setOriginalLanguageId(Integer originalLanguageId) {
+        this.originalLanguageId = originalLanguageId;
     }
 
     public Integer getRentalDuration() {

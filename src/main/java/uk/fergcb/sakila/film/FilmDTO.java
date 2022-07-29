@@ -1,18 +1,15 @@
 package uk.fergcb.sakila.film;
 
-import uk.fergcb.sakila.language.Language;
-
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.Optional;
 
 public class FilmDTO {
     private Integer filmId;
     private String title;
     private String description;
-    private Date releaseYear;
-    private String language;
-    private String originalLanguage;
+    private Integer releaseYear;
+    private Integer languageId;
+    private Integer originalLanguageId;
     private Integer rentalDuration;
     private BigDecimal rentalRate;
     private Integer length;
@@ -44,28 +41,28 @@ public class FilmDTO {
         this.description = description;
     }
 
-    public Optional<Date> getReleaseYear() {
+    public Optional<Integer> getReleaseYear() {
         return Optional.ofNullable(releaseYear);
     }
 
-    public void setReleaseYear(Date releaseYear) {
+    public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
     }
 
-    public Optional<String> getLanguage() {
-        return Optional.ofNullable(language);
+    public Optional<Integer> getLanguageId() {
+        return Optional.ofNullable(languageId);
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setLanguageId(Integer languageId) {
+        this.languageId = languageId;
     }
 
-    public Optional<String> getOriginalLanguage() {
-        return Optional.ofNullable(originalLanguage);
+    public Optional<Integer> getOriginalLanguageId() {
+        return Optional.ofNullable(originalLanguageId);
     }
 
-    public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
+    public void setOriginalLanguageId(Integer originalLanguageId) {
+        this.originalLanguageId = originalLanguageId;
     }
 
     public Optional<Integer> getRentalDuration() {
