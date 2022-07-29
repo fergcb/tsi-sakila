@@ -19,6 +19,7 @@ public class FilmDTO {
     private String rating;
     private String specialFeatures;
     private Set<Integer> categoryIds;
+    private Set<Integer> actorIds;
 
     public Optional<Integer> getFilmId() {
         return Optional.ofNullable(filmId);
@@ -122,5 +123,13 @@ public class FilmDTO {
 
     public void setCategoryIds(Set<Integer> categoryIds) {
         this.categoryIds = categoryIds;
+    }
+
+    public Set<Integer> getActorIds() {
+        return actorIds == null ? new HashSet<>() : actorIds;
+    }
+
+    public void setActorIds(Set<Integer> actorIds) {
+        this.actorIds = actorIds;
     }
 }

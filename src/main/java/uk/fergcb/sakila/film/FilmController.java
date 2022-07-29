@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import uk.fergcb.sakila.filmactor.FilmActor;
+import uk.fergcb.sakila.filmactor.FilmActorRepository;
 import uk.fergcb.sakila.filmcategory.FilmCategory;
 import uk.fergcb.sakila.filmcategory.FilmCategoryRepository;
 
@@ -15,12 +17,17 @@ public class FilmController {
 
     @Autowired
     private final FilmRepository filmRepository;
+
     @Autowired
     private final FilmCategoryRepository filmCategoryRepository;
 
-    public FilmController(FilmRepository filmRepository, FilmCategoryRepository filmCategoryRepository) {
+    @Autowired
+    private final FilmActorRepository filmActorRepository;
+
+    public FilmController(FilmRepository filmRepository, FilmCategoryRepository filmCategoryRepository, FilmActorRepository filmActorRepository) {
         this.filmRepository = filmRepository;
         this.filmCategoryRepository = filmCategoryRepository;
+        this.filmActorRepository = filmActorRepository;
     }
 
 
@@ -35,6 +42,13 @@ public class FilmController {
                 .toList();
 
         filmCategoryRepository.saveAll(filmCategories);
+
+        List<FilmActor> filmActors = filmDTO.getActorIds()
+                .stream()
+                .map(actorId ->  new FilmActor(filmId, actorId))
+                .toList();
+
+        filmActorRepository.saveAll(filmActors);
 
         return film;
     }
