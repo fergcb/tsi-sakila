@@ -16,11 +16,11 @@ public class FilmActor {
         this.filmActorKey = new FilmActorKey(filmId, actorId);
     }
 
-    public FilmActorKey getFilmKey() {
+    public FilmActorKey getFilmActorKey() {
         return filmActorKey;
     }
 
-    public void setFilmKey(FilmActorKey filmKey) {
+    public void setFilmActorKey(FilmActorKey filmKey) {
         this.filmActorKey = filmKey;
     }
 }

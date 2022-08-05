@@ -2,5 +2,8 @@ package uk.fergcb.sakila.filmactor;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface FilmActorRepository extends CrudRepository<FilmActor, Integer> {
+import java.util.Set;
+
+public interface FilmActorRepository extends CrudRepository<FilmActor, FilmActorKey> {
+    Set<FilmActor> findByFilmActorKeyFilmId(Integer filmId);
 }

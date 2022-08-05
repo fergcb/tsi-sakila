@@ -8,19 +8,19 @@ import javax.persistence.Table;
 @Table(name = "film_category")
 public class FilmCategory {
     @EmbeddedId
-    private FilmCategoryKey filmKey;
+    private FilmCategoryKey filmCategoryKey;
 
     public FilmCategory() {}
 
     public FilmCategory(Integer filmId, Integer categoryId) {
-        this.filmKey = new FilmCategoryKey(filmId, categoryId);
+        this.filmCategoryKey = new FilmCategoryKey(filmId, categoryId);
     }
 
-    public FilmCategoryKey getFilmKey() {
-        return filmKey;
+    public FilmCategoryKey getFilmCategoryKey() {
+        return filmCategoryKey;
     }
 
-    public void setFilmKey(FilmCategoryKey filmKey) {
-        this.filmKey = filmKey;
+    public void setFilmCategoryKey(FilmCategoryKey filmCategoryKey) {
+        this.filmCategoryKey = filmCategoryKey;
     }
 }

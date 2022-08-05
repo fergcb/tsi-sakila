@@ -10,6 +10,7 @@ import uk.fergcb.sakila.filmcategory.FilmCategory;
 import uk.fergcb.sakila.filmcategory.FilmCategoryRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/film")
@@ -70,7 +71,46 @@ public class FilmController {
         Film film = filmRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No film exists with that id."));
+
         film.updateFromDTO(filmDTO);
+
+        // Delete unwanted film_actor records
+        Set<Integer> actorIds = filmDTO.getActorIds();
+        Set<FilmActor> existingActorLinks = filmActorRepository.findByFilmActorKeyFilmId(id);
+
+        existingActorLinks.stream()
+                .filter(filmActor -> !actorIds.contains(filmActor.getFilmActorKey().getActorId()))
+                .forEach(filmActorRepository::delete);
+
+        // Create new film_actor records
+        List<Integer> linkedActors = existingActorLinks.stream()
+                .map(filmActor -> filmActor.getFilmActorKey().getActorId())
+                .toList();
+
+        actorIds.stream()
+                .filter(actorId -> !linkedActors.contains(actorId))
+                .map(actorId -> new FilmActor(id, actorId))
+                .forEach(filmActorRepository::save);
+
+
+        // Delete unwanted film_category records
+        Set<Integer> categoryIds = filmDTO.getCategoryIds();
+        Set<FilmCategory> existingCategoryLinks = filmCategoryRepository.findByFilmCategoryKeyFilmId(id);
+
+        existingCategoryLinks.stream()
+                .filter(filmCategory -> !actorIds.contains(filmCategory.getFilmCategoryKey().getCategoryId()))
+                .forEach(filmCategoryRepository::delete);
+
+        // Create new film_category records
+        List<Integer> linkedCategories = existingCategoryLinks.stream()
+                .map(filmCategory -> filmCategory.getFilmCategoryKey().getCategoryId())
+                .toList();
+
+        categoryIds.stream()
+                .filter(categoryId -> !linkedCategories.contains(categoryId))
+                .map(categoryId -> new FilmCategory(id, categoryId))
+                .forEach(filmCategoryRepository::save);
+
         return filmRepository.save(film);
     }
 
