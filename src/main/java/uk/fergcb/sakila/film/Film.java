@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name="film")
-public class Film extends PartialFilm {
+public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="film_id")
