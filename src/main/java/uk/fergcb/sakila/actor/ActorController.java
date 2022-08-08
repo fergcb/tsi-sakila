@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/actor")
+@RequestMapping("/actors")
 public class ActorController {
 
     @Autowired

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/film")
+@RequestMapping("/films")
 public class FilmController {
 
     @Autowired
