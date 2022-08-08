@@ -19,8 +19,6 @@ public class PartialFilm {
     @Column(name="release_year")
     private Integer releaseYear;
 
-    public PartialFilm() {}
-
     public int getFilmId() {
         return filmId;
     }

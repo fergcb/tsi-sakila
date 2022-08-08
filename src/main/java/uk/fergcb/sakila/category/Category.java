@@ -13,8 +13,6 @@ public class Category {
     @Column(name="name")
     private String name;
 
-    public Category () {}
-
     public int getCategoryId() {
         return categoryId;
     }
