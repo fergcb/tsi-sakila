@@ -1,7 +1,5 @@
 package uk.fergcb.sakila.actor;
 
-import java.util.Optional;
-
 public interface IActorService {
     Iterable<Actor> readActors();
     Iterable<Actor> readActorsByName(String name);

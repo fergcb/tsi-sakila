@@ -1,7 +1,5 @@
 package uk.fergcb.sakila.film;
 
-import java.util.Optional;
-
 public interface IFilmService {
     Iterable<Film> readFilms();
     Film readFilm(Integer id);

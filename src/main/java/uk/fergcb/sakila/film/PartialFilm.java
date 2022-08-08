@@ -1,7 +1,6 @@
 package uk.fergcb.sakila.film;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
 @Table(name="film")
