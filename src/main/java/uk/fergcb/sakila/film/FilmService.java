@@ -70,6 +70,8 @@ public class FilmService implements IFilmService {
      * @param categoryIds The IDs of the categories the film belongs to
      */
     private void createFilmCategories(Integer filmId, Set<Integer> categoryIds) {
+        if (categoryIds == null) return;
+
         // Create the FilmCategory entities
         List<FilmCategory> filmCategories = categoryIds
                 .stream()
@@ -86,6 +88,8 @@ public class FilmService implements IFilmService {
      * @param actorIds The IDs of the actors in the film
      */
     private void createFilmActors(Integer filmId, Set<Integer> actorIds) {
+        if (actorIds == null) return;
+
         // Create the FilmActor entities
         List<FilmActor> filmActors = actorIds
                 .stream()
@@ -122,6 +126,8 @@ public class FilmService implements IFilmService {
      * @param categoryIds The set of IDs of Categories that the Film should belong to
      */
     private void updateFilmCategories(Integer filmId, Set<Integer> categoryIds) {
+        if (categoryIds == null) return;
+
         Set<FilmCategory> existingCategoryLinks = filmCategoryRepository.findByFilmCategoryKeyFilmId(filmId);
 
         deleteUnwantedFilmCategories(categoryIds, existingCategoryLinks);
@@ -164,6 +170,8 @@ public class FilmService implements IFilmService {
      * @param actorIds The set of IDs of Actors that should be in the Film's cast
      */
     private void updateFilmActors(Integer filmId, Set<Integer> actorIds) {
+        if (actorIds == null) return;
+
         Set<FilmActor> existingActorLinks = filmActorRepository.findByFilmActorKeyFilmId(filmId);
 
         deleteUnwantedFilmActors(actorIds, existingActorLinks);

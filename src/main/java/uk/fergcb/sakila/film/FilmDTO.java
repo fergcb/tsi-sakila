@@ -118,7 +118,7 @@ public class FilmDTO {
     }
 
     public Set<Integer> getCategoryIds() {
-        return categoryIds == null ? new HashSet<>() : categoryIds;
+        return categoryIds;
     }
 
     public void setCategoryIds(Set<Integer> categoryIds) {
@@ -126,7 +126,7 @@ public class FilmDTO {
     }
 
     public Set<Integer> getActorIds() {
-        return actorIds == null ? new HashSet<>() : actorIds;
+        return actorIds;
     }
 
     public void setActorIds(Set<Integer> actorIds) {
