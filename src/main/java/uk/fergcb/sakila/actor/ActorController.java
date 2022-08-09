@@ -1,6 +1,8 @@
 package uk.fergcb.sakila.actor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,8 +25,10 @@ public class ActorController {
     }
 
     @PostMapping
-    public void createActor(@RequestBody ActorDTO actorDTO) {
+    public ResponseEntity<Void> createActor(@RequestBody ActorDTO actorDTO) {
         actorService.createActor(actorDTO);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/{id}")
@@ -33,12 +37,16 @@ public class ActorController {
     }
 
     @PatchMapping("/{id}")
-    public void updateActorById(@PathVariable int id, @RequestBody ActorDTO actorDTO) {
+    public ResponseEntity<Void> updateActorById(@PathVariable int id, @RequestBody ActorDTO actorDTO) {
         actorService.updateActor(id, actorDTO);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteActorById(@PathVariable int id) {
+    public ResponseEntity<Void> deleteActorById(@PathVariable int id) {
         actorService.deleteActor(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

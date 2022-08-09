@@ -1,6 +1,8 @@
 package uk.fergcb.sakila.film;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,8 +13,10 @@ public class FilmController {
     IFilmService filmService;
 
     @PostMapping
-    public void createFilm(@RequestBody FilmDTO filmDTO) {
+    public ResponseEntity<Void> createFilm(@RequestBody FilmDTO filmDTO) {
         filmService.createFilm(filmDTO);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
@@ -26,12 +30,16 @@ public class FilmController {
     }
 
     @PatchMapping("/{id}")
-    public void updateActorById(@PathVariable int id, @RequestBody FilmDTO filmDTO) {
+    public ResponseEntity<Void> updateActorById(@PathVariable int id, @RequestBody FilmDTO filmDTO) {
         filmService.updateFilm(id, filmDTO);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFilmById(@PathVariable int id) {
+    public ResponseEntity<Void> deleteFilmById(@PathVariable int id) {
         filmService.deleteFilm(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
