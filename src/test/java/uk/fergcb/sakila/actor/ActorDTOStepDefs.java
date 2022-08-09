@@ -4,8 +4,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class ActorDTOStepDefs {
 
@@ -37,12 +37,12 @@ public class ActorDTOStepDefs {
 
     @Then("the Actor should have all not-null fields")
     public void actorHasAllNotNullFields() {
-        assertNotNull(actor.getFirstName(), "firstName should not be null");
-        assertNotNull(actor.getLastName(), "lastName should not be null");
+        assertNotNull("firstName should not be null", actor.getFirstName());
+        assertNotNull("lastName should not be null", actor.getLastName());
     }
 
     @Then("the Actor should not have a lastName")
     public void unsetFieldsAreNull() {
-        assertNull(actor.getLastName(), "lastName should be null");
+        assertNull("lastName should be null", actor.getLastName());
     }
 }

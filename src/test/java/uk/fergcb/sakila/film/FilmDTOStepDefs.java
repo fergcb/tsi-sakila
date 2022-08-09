@@ -6,8 +6,8 @@ import io.cucumber.java.en.When;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 
 public class FilmDTOStepDefs {
 
@@ -57,19 +57,19 @@ public class FilmDTOStepDefs {
 
     @Then("the Film should have all fields")
     public void FilmHasAllNotNullFields() {
-        assertNotNull(film.getTitle(), "title should not be null");
-        assertNotNull(film.getDescription(), "description should not be null");
-        assertNotNull(film.getReleaseYear(), "releaseYear should not be null");
-        assertNotNull(film.getRentalDuration(), "rentalDuration should not be null");
-        assertNotNull(film.getRentalRate(), "rentalRate should not be null");
-        assertNotNull(film.getLength(), "length should not be null");
-        assertNotNull(film.getReplacementCost(), "replacementCost should not be null");
-        assertNotNull(film.getRating(), "rating should not be null");
-        assertNotNull(film.getSpecialFeatures(), "specialFeatures should not be null");
+        assertNotNull("title should not be null", film.getTitle());
+        assertNotNull("description should not be null", film.getDescription());
+        assertNotNull("releaseYear should not be null", film.getReleaseYear());
+        assertNotNull("rentalDuration should not be null", film.getRentalDuration());
+        assertNotNull("rentalRate should not be null", film.getRentalRate());
+        assertNotNull("length should not be null", film.getLength());
+        assertNotNull("replacementCost should not be null", film.getReplacementCost());
+        assertNotNull("rating should not be null", film.getRating());
+        assertNotNull("specialFeatures should not be null", film.getSpecialFeatures());
     }
 
     @Then("the Film should not have a description")
     public void unsetFieldsAreNull() {
-        assertNull(film.getDescription(), "description should be null");
+        assertNull("description should be null", film.getDescription());
     }
 }
