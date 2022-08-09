@@ -1,6 +1,7 @@
 package uk.fergcb.sakila.actor;
 
 import org.hibernate.annotations.Formula;
+import org.springframework.hateoas.RepresentationModel;
 import uk.fergcb.sakila.film.PartialFilm;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name="actor")
-public class Actor {
+public class Actor extends RepresentationModel<Actor> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="actor_id")

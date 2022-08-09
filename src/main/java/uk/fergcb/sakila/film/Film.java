@@ -1,5 +1,6 @@
 package uk.fergcb.sakila.film;
 
+import org.springframework.hateoas.RepresentationModel;
 import uk.fergcb.sakila.actor.PartialActor;
 import uk.fergcb.sakila.category.Category;
 import uk.fergcb.sakila.language.Language;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name="film")
-public class Film {
+public class Film extends RepresentationModel<Film> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="film_id")

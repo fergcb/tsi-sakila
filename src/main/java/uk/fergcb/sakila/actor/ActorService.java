@@ -5,6 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Service
 public class ActorService implements IActorService {
 
@@ -40,17 +45,24 @@ public class ActorService implements IActorService {
      */
     @Override
     public Actor readActor(Integer id) {
-        return actorRepository.findById(id)
+        Actor actor = actorRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No actor exists with that id."));
+
+        actor.add(linkTo(methodOn(ActorController.class).getActorById(id)).withSelfRel());
+
+        return actor;
     }
 
     /**
      * Create a new Actor resource from a Data Transfer Object
+     *
      * @param actorDTO the data to create the Actor with
+     * @return The ID of the created Actor record
      */
     @Override
-    public void createActor(ActorDTO actorDTO) {
-        actorRepository.save(new Actor(actorDTO));
+    public Integer createActor(ActorDTO actorDTO) {
+        Actor actor = actorRepository.save(new Actor(actorDTO));
+        return actor.getActorId();
     }
 
     /**

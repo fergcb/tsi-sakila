@@ -25,10 +25,10 @@ public class ActorController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createActor(@RequestBody ActorDTO actorDTO) {
-        actorService.createActor(actorDTO);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Actor> createActor(@RequestBody ActorDTO actorDTO) {
+        Integer id = actorService.createActor(actorDTO);
+        Actor actor = actorService.readActor(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(actor);
     }
 
     @GetMapping("/{id}")
@@ -37,16 +37,16 @@ public class ActorController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> updateActorById(@PathVariable int id, @RequestBody ActorDTO actorDTO) {
+    public ResponseEntity<Actor> updateActorById(@PathVariable int id, @RequestBody ActorDTO actorDTO) {
         actorService.updateActor(id, actorDTO);
-
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        Actor actor = actorService.readActor(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(actor);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteActorById(@PathVariable int id) {
+    public ResponseEntity<Actor> deleteActorById(@PathVariable int id) {
         actorService.deleteActor(id);
-
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        Actor actor = actorService.readActor(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(actor);
     }
 }

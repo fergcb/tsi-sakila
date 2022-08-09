@@ -9,8 +9,12 @@ import uk.fergcb.sakila.filmactor.FilmActorRepository;
 import uk.fergcb.sakila.filmcategory.FilmCategory;
 import uk.fergcb.sakila.filmcategory.FilmCategoryRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class FilmService implements IFilmService {
@@ -46,22 +50,30 @@ public class FilmService implements IFilmService {
      */
     @Override
     public Film readFilm(Integer id) {
-        return filmRepository.findById(id)
+        Film film = filmRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No film exists with that id."));
+
+        film.add(linkTo(methodOn(FilmController.class).getFilmById(id)).withSelfRel());
+
+        return film;
     }
 
     /**
      * Create a new Film resource from a Data Transfer Object
+     *
      * @param filmDTO the data to create the Film with
+     * @return The ID of the created Film record
      */
+
     @Override
-    public void createFilm(FilmDTO filmDTO) {
+    public Integer createFilm(FilmDTO filmDTO) {
         Film film = filmRepository.save(new Film(filmDTO));
         Integer filmId = film.getFilmId();
 
         // Create link table entries for categories and actors
         createFilmCategories(filmId, filmDTO.getCategoryIds());
         createFilmActors(filmId, filmDTO.getActorIds());
+        return filmId;
     }
 
     /**

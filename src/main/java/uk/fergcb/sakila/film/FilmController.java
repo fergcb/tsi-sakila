@@ -13,10 +13,10 @@ public class FilmController {
     IFilmService filmService;
 
     @PostMapping
-    public ResponseEntity<Void> createFilm(@RequestBody FilmDTO filmDTO) {
-        filmService.createFilm(filmDTO);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Film> createFilm(@RequestBody FilmDTO filmDTO) {
+        Integer id = filmService.createFilm(filmDTO);
+        Film film = filmService.readFilm(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(film);
     }
 
     @GetMapping
@@ -30,16 +30,16 @@ public class FilmController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> updateFilmById(@PathVariable int id, @RequestBody FilmDTO filmDTO) {
+    public ResponseEntity<Film> updateFilmById(@PathVariable int id, @RequestBody FilmDTO filmDTO) {
         filmService.updateFilm(id, filmDTO);
-
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        Film film = filmService.readFilm(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(film);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFilmById(@PathVariable int id) {
+    public ResponseEntity<Film> deleteFilmById(@PathVariable int id) {
         filmService.deleteFilm(id);
-
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        Film film = filmService.readFilm(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(film);
     }
 }
