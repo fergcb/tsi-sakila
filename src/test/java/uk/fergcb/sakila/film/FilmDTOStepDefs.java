@@ -6,8 +6,8 @@ import io.cucumber.java.en.When;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class FilmDTOStepDefs {
 

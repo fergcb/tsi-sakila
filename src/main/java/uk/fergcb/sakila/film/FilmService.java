@@ -9,7 +9,6 @@ import uk.fergcb.sakila.filmactor.FilmActorRepository;
 import uk.fergcb.sakila.filmcategory.FilmCategory;
 import uk.fergcb.sakila.filmcategory.FilmCategoryRepository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
