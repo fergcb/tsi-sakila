@@ -14,7 +14,7 @@
 	<name>sakila</name>
 	<description>A Movie Catalogue with Sakila</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>17</java.version>
 		<sonar.organization>fergcb</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
@@ -69,6 +69,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>sakila-api</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
