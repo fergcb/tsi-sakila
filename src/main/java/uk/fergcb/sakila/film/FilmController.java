@@ -30,7 +30,7 @@ public class FilmController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> updateActorById(@PathVariable int id, @RequestBody FilmDTO filmDTO) {
+    public ResponseEntity<Void> updateFilmById(@PathVariable int id, @RequestBody FilmDTO filmDTO) {
         filmService.updateFilm(id, filmDTO);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
