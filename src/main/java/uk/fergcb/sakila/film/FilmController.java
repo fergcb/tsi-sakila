@@ -20,24 +20,24 @@ public class FilmController {
     }
 
     @GetMapping
-    public @ResponseBody Iterable<Film> getFilms() {
+    public @ResponseBody FilmCollection getFilms() {
         return filmService.readFilms();
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody Film getFilmById(@PathVariable int id) {
+    public @ResponseBody Film getFilmById(@PathVariable Integer id) {
         return filmService.readFilm(id);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Film> updateFilmById(@PathVariable int id, @RequestBody FilmDTO filmDTO) {
+    public ResponseEntity<Film> updateFilmById(@PathVariable Integer id, @RequestBody FilmDTO filmDTO) {
         filmService.updateFilm(id, filmDTO);
         Film film = filmService.readFilm(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(film);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Film> deleteFilmById(@PathVariable int id) {
+    public ResponseEntity<Film> deleteFilmById(@PathVariable Integer id) {
         filmService.deleteFilm(id);
         Film film = filmService.readFilm(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(film);

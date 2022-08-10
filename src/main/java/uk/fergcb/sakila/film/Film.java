@@ -1,17 +1,22 @@
 package uk.fergcb.sakila.film;
 
-import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.Link;
 import uk.fergcb.sakila.actor.PartialActor;
 import uk.fergcb.sakila.category.Category;
+import uk.fergcb.sakila.hateoas.HateoasResource;
 import uk.fergcb.sakila.language.Language;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Entity
 @Table(name="film")
-public class Film extends RepresentationModel<Film> {
+public class Film extends HateoasResource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="film_id")
@@ -198,5 +203,12 @@ public class Film extends RepresentationModel<Film> {
 
     public List<Category> getCategories() {
         return categories;
+    }
+
+    @Override
+    protected Collection<Link> getLinks() {
+        return List.of(
+                linkTo(methodOn(FilmController.class).getFilmById(getFilmId())).withSelfRel()
+        );
     }
 }

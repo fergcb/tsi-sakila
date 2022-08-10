@@ -5,15 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 @Service
 public class ActorService implements IActorService {
 
     @Autowired
     private final ActorRepository actorRepository;
-
     public ActorService (ActorRepository actorRepository) {
         this.actorRepository = actorRepository;
     }
@@ -23,16 +19,16 @@ public class ActorService implements IActorService {
      * @return an iterable collection of Actors
      */
     @Override
-    public Iterable<Actor> readActors() {
-        return actorRepository.findAll();
+    public ActorCollection readActors() {
+        return new ActorCollection(actorRepository.findAll());
     }
     /**
      * Read all Actors resources from the collection whose names match a partial name string
      * @return an iterable collection of Actors
      */
     @Override
-    public Iterable<Actor> readActorsByName(String name) {
-        return actorRepository.findByFullNameContainingIgnoreCase(name);
+    public ActorCollection readActorsByName(String name) {
+        return new ActorCollection(actorRepository.findByFullNameContainingIgnoreCase(name));
     }
 
     /**
@@ -43,12 +39,8 @@ public class ActorService implements IActorService {
      */
     @Override
     public Actor readActor(Integer id) {
-        Actor actor = actorRepository.findById(id)
+        return actorRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No actor exists with that id."));
-
-        actor.add(linkTo(methodOn(ActorController.class).getActorById(id)).withSelfRel());
-
-        return actor;
     }
 
     /**

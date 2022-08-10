@@ -35,11 +35,12 @@ public class FilmService implements IFilmService {
 
     /**
      * Read all Film resources from the collection
+     *
      * @return an iterable collection of Films
      */
     @Override
-    public Iterable<Film> readFilms() {
-        return filmRepository.findAll();
+    public FilmCollection readFilms() {
+        return new FilmCollection(filmRepository.findAll());
     }
 
     /**
@@ -49,12 +50,8 @@ public class FilmService implements IFilmService {
      */
     @Override
     public Film readFilm(Integer id) {
-        Film film = filmRepository.findById(id)
+        return filmRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No film exists with that id."));
-
-        film.add(linkTo(methodOn(FilmController.class).getFilmById(id)).withSelfRel());
-
-        return film;
     }
 
     /**

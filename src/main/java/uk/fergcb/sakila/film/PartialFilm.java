@@ -1,10 +1,18 @@
 package uk.fergcb.sakila.film;
 
+import org.springframework.hateoas.Link;
+import uk.fergcb.sakila.hateoas.HateoasResource;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Entity
 @Table(name="film")
-public class PartialFilm {
+public class PartialFilm extends HateoasResource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="film_id")
@@ -49,5 +57,12 @@ public class PartialFilm {
 
     public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
+    }
+
+    @Override
+    protected Collection<Link> getLinks() {
+        return List.of(
+                linkTo(methodOn(FilmController.class).getFilmById(getFilmId())).withSelfRel()
+        );
     }
 }

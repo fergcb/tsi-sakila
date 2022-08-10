@@ -17,7 +17,7 @@ public class ActorController {
     }
 
     @GetMapping
-    public @ResponseBody Iterable<Actor> getActors(@RequestParam(name = "name", required = false) String name) {
+    public @ResponseBody ActorCollection getActors(@RequestParam(name = "name", required = false) String name) {
         if (name != null) {
             return actorService.readActorsByName(name);
         }
@@ -32,19 +32,19 @@ public class ActorController {
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody Actor getActorById(@PathVariable int id) {
+    public @ResponseBody Actor getActorById(@PathVariable Integer id) {
         return actorService.readActor(id);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Actor> updateActorById(@PathVariable int id, @RequestBody ActorDTO actorDTO) {
+    public ResponseEntity<Actor> updateActorById(@PathVariable Integer id, @RequestBody ActorDTO actorDTO) {
         actorService.updateActor(id, actorDTO);
         Actor actor = actorService.readActor(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(actor);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Actor> deleteActorById(@PathVariable int id) {
+    public ResponseEntity<Actor> deleteActorById(@PathVariable Integer id) {
         actorService.deleteActor(id);
         Actor actor = actorService.readActor(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(actor);

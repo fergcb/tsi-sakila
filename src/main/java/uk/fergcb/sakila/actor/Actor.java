@@ -1,35 +1,40 @@
 package uk.fergcb.sakila.actor;
 
 import org.hibernate.annotations.Formula;
-import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.Link;
 import uk.fergcb.sakila.film.PartialFilm;
+import uk.fergcb.sakila.hateoas.HateoasResource;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Entity
 @Table(name="actor")
-public class Actor extends RepresentationModel<Actor> {
+public class Actor extends HateoasResource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="actor_id")
-    private int actorId;
+    protected int actorId;
 
     @Column(name="first_name")
-    private String firstName;
+    protected String firstName;
 
     @Column(name="last_name")
-    private String lastName;
+    protected String lastName;
 
     @Formula("concat(first_name, ' ', last_name)")
-    private String fullName;
+    protected String fullName;
 
     @ManyToMany
     @JoinTable(name="film_actor",
         joinColumns = @JoinColumn(name="actor_id"),
         inverseJoinColumns = @JoinColumn(name="film_id")
     )
-    private List<PartialFilm> films;
+    protected List<PartialFilm> films;
 
     public Actor(ActorDTO actorDTO) {
         this.updateFromDTO(actorDTO);
@@ -72,5 +77,12 @@ public class Actor extends RepresentationModel<Actor> {
 
     public List<PartialFilm> getFilms() {
         return films;
+    }
+
+    @Override
+    protected Collection<Link> getLinks() {
+        return List.of(
+                linkTo(methodOn(ActorController.class).getActorById(getActorId())).withSelfRel()
+        );
     }
 }
