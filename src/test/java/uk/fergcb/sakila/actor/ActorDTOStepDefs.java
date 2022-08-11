@@ -3,6 +3,8 @@ package uk.fergcb.sakila.actor;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import uk.fergcb.sakila.resources.actor.Actor;
+import uk.fergcb.sakila.resources.actor.ActorDTO;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;

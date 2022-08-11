@@ -3,6 +3,8 @@ package uk.fergcb.sakila.film;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import uk.fergcb.sakila.resources.film.Film;
+import uk.fergcb.sakila.resources.film.FilmDTO;
 
 import java.math.BigDecimal;
 
