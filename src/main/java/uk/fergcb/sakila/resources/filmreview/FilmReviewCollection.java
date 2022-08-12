@@ -2,12 +2,9 @@ package uk.fergcb.sakila.resources.filmreview;
 
 import org.springframework.hateoas.Link;
 import uk.fergcb.sakila.hateoas.HateoasCollection;
-import uk.fergcb.sakila.resources.film.Film;
-import uk.fergcb.sakila.resources.film.FilmController;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;

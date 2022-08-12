@@ -1,6 +1,5 @@
 package uk.fergcb.sakila.resources.filmreview;
 
-import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.hateoas.Link;
 import uk.fergcb.sakila.hateoas.HateoasResource;
 
