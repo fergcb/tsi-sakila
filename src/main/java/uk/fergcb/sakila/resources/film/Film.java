@@ -1,9 +1,9 @@
 package uk.fergcb.sakila.resources.film;
 
 import org.springframework.hateoas.Link;
+import uk.fergcb.sakila.hateoas.HateoasResource;
 import uk.fergcb.sakila.resources.actor.PartialActor;
 import uk.fergcb.sakila.resources.category.Category;
-import uk.fergcb.sakila.hateoas.HateoasResource;
 import uk.fergcb.sakila.resources.language.Language;
 
 import javax.persistence.*;

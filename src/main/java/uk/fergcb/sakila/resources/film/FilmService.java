@@ -12,8 +12,6 @@ import uk.fergcb.sakila.resources.filmcategory.FilmCategoryRepository;
 import java.util.List;
 import java.util.Set;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-
 @Service
 public class FilmService implements IFilmService {
 

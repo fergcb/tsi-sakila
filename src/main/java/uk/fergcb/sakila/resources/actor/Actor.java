@@ -2,8 +2,8 @@ package uk.fergcb.sakila.resources.actor;
 
 import org.hibernate.annotations.Formula;
 import org.springframework.hateoas.Link;
-import uk.fergcb.sakila.resources.film.PartialFilm;
 import uk.fergcb.sakila.hateoas.HateoasResource;
+import uk.fergcb.sakila.resources.film.PartialFilm;
 
 import javax.persistence.*;
 import java.util.Collection;
