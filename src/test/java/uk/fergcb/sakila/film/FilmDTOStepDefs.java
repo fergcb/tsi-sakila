@@ -6,8 +6,6 @@ import io.cucumber.java.en.When;
 import uk.fergcb.sakila.resources.film.Film;
 import uk.fergcb.sakila.resources.film.FilmDTO;
 
-import java.math.BigDecimal;
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -25,12 +23,8 @@ public class FilmDTOStepDefs {
         filmDTO.setReleaseYear(1999);
         filmDTO.setLanguageId(1);
         filmDTO.setOriginalLanguageId(2);
-        filmDTO.setRentalDuration(3);
-        filmDTO.setRentalRate(BigDecimal.valueOf(5.99));
         filmDTO.setLength(120);
-        filmDTO.setReplacementCost(BigDecimal.valueOf(20.52));
         filmDTO.setRating("U");
-        filmDTO.setSpecialFeatures("Trailers,Deleted Scenes");
     }
 
     @Given("the DTO doesn't include a description")
@@ -40,12 +34,8 @@ public class FilmDTOStepDefs {
         filmDTO.setReleaseYear(1999);
         filmDTO.setLanguageId(1);
         filmDTO.setOriginalLanguageId(2);
-        filmDTO.setRentalDuration(3);
-        filmDTO.setRentalRate(BigDecimal.valueOf(5.99));
         filmDTO.setLength(120);
-        filmDTO.setReplacementCost(BigDecimal.valueOf(20.52));
         filmDTO.setRating("U");
-        filmDTO.setSpecialFeatures("Trailers,Deleted Scenes");
     }
 
     @When("I create a new Film")
@@ -62,12 +52,8 @@ public class FilmDTOStepDefs {
         assertNotNull("title should not be null", film.getTitle());
         assertNotNull("description should not be null", film.getDescription());
         assertNotNull("releaseYear should not be null", film.getReleaseYear());
-        assertNotNull("rentalDuration should not be null", film.getRentalDuration());
-        assertNotNull("rentalRate should not be null", film.getRentalRate());
         assertNotNull("length should not be null", film.getLength());
-        assertNotNull("replacementCost should not be null", film.getReplacementCost());
         assertNotNull("rating should not be null", film.getRating());
-        assertNotNull("specialFeatures should not be null", film.getSpecialFeatures());
     }
 
     @Then("the Film should not have a description")
