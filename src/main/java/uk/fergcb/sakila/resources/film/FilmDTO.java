@@ -11,12 +11,8 @@ public class FilmDTO {
     private Integer releaseYear;
     private Integer languageId;
     private Integer originalLanguageId;
-    private Integer rentalDuration;
-    private BigDecimal rentalRate;
     private Integer length;
-    private BigDecimal replacementCost;
     private String rating;
-    private String specialFeatures;
     private Set<Integer> categoryIds;
     private Set<Integer> actorIds;
 
@@ -68,22 +64,6 @@ public class FilmDTO {
         this.originalLanguageId = originalLanguageId;
     }
 
-    public Optional<Integer> getRentalDuration() {
-        return Optional.ofNullable(rentalDuration);
-    }
-
-    public void setRentalDuration(Integer rentalDuration) {
-        this.rentalDuration = rentalDuration;
-    }
-
-    public Optional<BigDecimal> getRentalRate() {
-        return Optional.ofNullable(rentalRate);
-    }
-
-    public void setRentalRate(BigDecimal rentalRate) {
-        this.rentalRate = rentalRate;
-    }
-
     public Optional<Integer> getLength() {
         return Optional.ofNullable(length);
     }
@@ -92,28 +72,12 @@ public class FilmDTO {
         this.length = length;
     }
 
-    public Optional<BigDecimal> getReplacementCost() {
-        return Optional.ofNullable(replacementCost);
-    }
-
-    public void setReplacementCost(BigDecimal replacementCost) {
-        this.replacementCost = replacementCost;
-    }
-
     public Optional<String> getRating() {
         return Optional.ofNullable(rating);
     }
 
     public void setRating(String rating) {
         this.rating = rating;
-    }
-
-    public Optional<String> getSpecialFeatures() {
-        return Optional.ofNullable(specialFeatures);
-    }
-
-    public void setSpecialFeatures(String specialFeatures) {
-        this.specialFeatures = specialFeatures;
     }
 
     public Set<Integer> getCategoryIds() {

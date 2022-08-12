@@ -48,23 +48,11 @@ public class Film extends HateoasResource {
     @Column(name="original_language_id")
     private Integer originalLanguageId;
 
-    @Column(name="rental_duration")
-    private Integer rentalDuration;
-
-    @Column(name="rental_rate")
-    private BigDecimal rentalRate;
-
     @Column(name="length")
     private Integer length;
 
-    @Column(name="replacement_cost")
-    private BigDecimal replacementCost;
-
     @Column(name="rating")
     private String rating;
-
-    @Column(name="special_features")
-    private String specialFeatures;
 
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name="film_id")
@@ -96,12 +84,8 @@ public class Film extends HateoasResource {
         this.releaseYear = filmDTO.getReleaseYear().orElse(releaseYear);
         this.languageId = filmDTO.getLanguageId().orElse(languageId);
         this.originalLanguageId = filmDTO.getOriginalLanguageId().orElse(originalLanguageId);
-        this.rentalDuration = filmDTO.getRentalDuration().orElse(rentalDuration);
-        this.rentalRate = filmDTO.getRentalRate().orElse(rentalRate);
         this.length = filmDTO.getLength().orElse(length);
-        this.replacementCost = filmDTO.getReplacementCost().orElse(replacementCost);
         this.rating = filmDTO.getRating().orElse(rating);
-        this.specialFeatures = filmDTO.getSpecialFeatures().orElse(specialFeatures);
     }
 
     public int getFilmId() {
@@ -152,22 +136,6 @@ public class Film extends HateoasResource {
         this.originalLanguageId = originalLanguageId;
     }
 
-    public Integer getRentalDuration() {
-        return rentalDuration;
-    }
-
-    public void setRentalDuration(Integer rentalDuration) {
-        this.rentalDuration = rentalDuration;
-    }
-
-    public BigDecimal getRentalRate() {
-        return rentalRate;
-    }
-
-    public void setRentalRate(BigDecimal rentalRate) {
-        this.rentalRate = rentalRate;
-    }
-
     public Integer getLength() {
         return length;
     }
@@ -176,28 +144,12 @@ public class Film extends HateoasResource {
         this.length = length;
     }
 
-    public BigDecimal getReplacementCost() {
-        return replacementCost;
-    }
-
-    public void setReplacementCost(BigDecimal replacementCost) {
-        this.replacementCost = replacementCost;
-    }
-
     public String getRating() {
         return rating;
     }
 
     public void setRating(String rating) {
         this.rating = rating;
-    }
-
-    public String getSpecialFeatures() {
-        return specialFeatures;
-    }
-
-    public void setSpecialFeatures(String specialFeatures) {
-        this.specialFeatures = specialFeatures;
     }
 
     public List<PartialActor> getCast() {
