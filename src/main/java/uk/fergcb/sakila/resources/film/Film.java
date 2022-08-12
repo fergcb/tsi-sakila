@@ -4,12 +4,15 @@ import org.springframework.hateoas.Link;
 import uk.fergcb.sakila.hateoas.HateoasResource;
 import uk.fergcb.sakila.resources.actor.PartialActor;
 import uk.fergcb.sakila.resources.category.Category;
+import uk.fergcb.sakila.resources.filmreview.FilmReview;
+import uk.fergcb.sakila.resources.filmreview.FilmReviewController;
 import uk.fergcb.sakila.resources.language.Language;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -62,6 +65,10 @@ public class Film extends HateoasResource {
 
     @Column(name="special_features")
     private String specialFeatures;
+
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name="film_id")
+    private Set<FilmReview> reviews;
 
     @ManyToMany
     @JoinTable(name="film_actor",
@@ -208,7 +215,8 @@ public class Film extends HateoasResource {
     @Override
     protected Collection<Link> getLinks() {
         return List.of(
-                linkTo(methodOn(FilmController.class).getFilmById(getFilmId())).withSelfRel()
+                linkTo(methodOn(FilmController.class).getFilmById(getFilmId())).withSelfRel(),
+                linkTo(methodOn(FilmReviewController.class).getFilmReviews(getFilmId())).withRel("reviews")
         );
     }
 }
