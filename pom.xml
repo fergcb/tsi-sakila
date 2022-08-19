@@ -8,8 +8,8 @@
 		<version>2.7.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>uk.fergcb</groupId>
-	<artifactId>sakila</artifactId>
+	<groupId>uk.fergcb.sakila</groupId>
+	<artifactId>sakila-data</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sakila</name>
 	<description>A Movie Catalogue with Sakila</description>
@@ -90,7 +90,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>sakila-api</finalName>
+		<finalName>sakila-data</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

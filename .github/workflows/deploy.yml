@@ -39,4 +39,4 @@ jobs:
           environment_name: SakilaAPI-env
           version_label: ${{github.SHA}}
           region: eu-west-2
-          deployment_package: sakila-api.jar
+          deployment_package: sakila-data.jar
