@@ -1,6 +1,8 @@
 package uk.fergcb.sakila.data.resources.filmreview;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,8 +20,8 @@ public class FilmReviewService {
      * Read all FilmReviews
      * @return an iterable collection of FilmReviews
      */
-    public Iterable<FilmReview> readReviews() {
-        return filmReviewRepository.findAll();
+    public Page<FilmReview> readReviews(Pageable pageable) {
+        return filmReviewRepository.findAll(pageable);
     }
 
     /**
@@ -27,8 +29,8 @@ public class FilmReviewService {
      * @param filmId The unique ID of the Film to get reviews for
      * @return an iterable collection of FilmReviews for the given Film
      */
-    public Iterable<FilmReview> readReviewsForFilm(Integer filmId) {
-        return filmReviewRepository.findAllByFilmId(filmId);
+    public Page<FilmReview> readReviewsForFilm(Integer filmId, Pageable pageable) {
+        return filmReviewRepository.findAllByFilmId(filmId, pageable);
     }
 
     /**

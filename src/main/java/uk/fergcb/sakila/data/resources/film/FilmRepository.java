@@ -1,6 +1,5 @@
 package uk.fergcb.sakila.data.resources.film;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface FilmRepository extends CrudRepository<Film, Integer> {
-}
+public interface FilmRepository extends PagingAndSortingRepository<Film, Integer> {}

@@ -1,6 +1,7 @@
 package uk.fergcb.sakila.data.resources.actor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,16 +20,16 @@ public class ActorService implements IActorService {
      * @return an iterable collection of Actors
      */
     @Override
-    public ActorCollection readActors() {
-        return new ActorCollection(actorRepository.findAll());
+    public ActorCollection readActors(Pageable pageable) {
+        return new ActorCollection(actorRepository.findAll(pageable));
     }
     /**
      * Read all Actors resources from the collection whose names match a partial name string
      * @return an iterable collection of Actors
      */
     @Override
-    public ActorCollection readActorsByName(String name) {
-        return new ActorCollection(actorRepository.findByFullNameContainingIgnoreCase(name));
+    public ActorCollection readActorsByName(String name, Pageable pageable) {
+        return new ActorCollection(actorRepository.findByFullNameContainingIgnoreCase(name, pageable));
     }
 
     /**

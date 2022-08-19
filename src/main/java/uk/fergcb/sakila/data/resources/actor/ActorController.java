@@ -1,6 +1,8 @@
 package uk.fergcb.sakila.data.resources.actor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +19,20 @@ public class ActorController {
     }
 
     @GetMapping
-    public @ResponseBody ActorCollection getActors(@RequestParam(name = "name", required = false) String name) {
+    public @ResponseBody ActorCollection getActors(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer size
+    ) {
+        final Pageable pageable = PageRequest.of(
+                page != null ? page : 0,
+                size != null ? size : 20
+        );
+
         if (name != null) {
-            return actorService.readActorsByName(name);
+            return actorService.readActorsByName(name, pageable);
         }
-        return actorService.readActors();
+        return actorService.readActors(pageable);
     }
 
     @PostMapping

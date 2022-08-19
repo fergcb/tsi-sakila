@@ -24,8 +24,8 @@ public class OptionsController {
     public Options getOptions() {
         Options options = new Options();
 
-        options.add(linkTo(methodOn(ActorController.class).getActors(null)).withRel("actors").expand());
-        options.add(linkTo(methodOn(FilmController.class).getFilms()).withRel("films").expand());
+        options.add(linkTo(methodOn(ActorController.class).getActors(null, null, null)).withRel("actors").expand());
+        options.add(linkTo(methodOn(FilmController.class).getFilms(null, null)).withRel("films").expand());
 
         return options;
     }

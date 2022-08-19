@@ -1,9 +1,11 @@
 package uk.fergcb.sakila.data.resources.film;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.data.domain.Pageable;
 import uk.fergcb.sakila.data.resources.filmcategory.FilmCategory;
 import uk.fergcb.sakila.data.resources.filmcategory.FilmCategoryRepository;
 import uk.fergcb.sakila.data.resources.filmactor.FilmActor;
@@ -36,8 +38,9 @@ public class FilmService implements IFilmService {
      * @return an iterable collection of Films
      */
     @Override
-    public FilmCollection readFilms() {
-        return new FilmCollection(filmRepository.findAll());
+    public FilmCollection readFilms(Pageable pageable) {
+        Page<Film> page = filmRepository.findAll(pageable);
+        return new FilmCollection(page);
     }
 
     /**

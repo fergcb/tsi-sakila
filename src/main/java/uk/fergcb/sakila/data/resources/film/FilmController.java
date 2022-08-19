@@ -1,6 +1,8 @@
 package uk.fergcb.sakila.data.resources.film;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +22,16 @@ public class FilmController {
     }
 
     @GetMapping
-    public @ResponseBody FilmCollection getFilms() {
-        return filmService.readFilms();
+    public @ResponseBody FilmCollection getFilms(
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer size
+    ) {
+        final Pageable pageable = PageRequest.of(
+                page != null ? page : 0,
+                size != null ? size : 20
+        );
+
+        return filmService.readFilms(pageable);
     }
 
     @GetMapping("/{id}")

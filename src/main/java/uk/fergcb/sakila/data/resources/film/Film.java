@@ -167,7 +167,7 @@ public class Film extends HateoasResource {
     protected Collection<Link> getLinks() {
         return List.of(
                 linkTo(methodOn(FilmController.class).getFilmById(getFilmId())).withSelfRel(),
-                linkTo(methodOn(FilmReviewController.class).getFilmReviews(getFilmId())).withRel("reviews")
+                linkTo(methodOn(FilmReviewController.class).getFilmReviews(getFilmId(), null, null)).withRel("reviews").expand()
         );
     }
 }

@@ -1,7 +1,10 @@
 package uk.fergcb.sakila.data.resources.filmreview;
 
+import org.springframework.data.domain.Page;
 import org.springframework.hateoas.Link;
 import uk.fergcb.sakila.data.hateoas.HateoasCollection;
+import uk.fergcb.sakila.data.hateoas.PagedCollection;
+import uk.fergcb.sakila.data.resources.actor.ActorController;
 
 import java.util.Collection;
 import java.util.List;
@@ -9,30 +12,40 @@ import java.util.List;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-public class FilmReviewCollection extends HateoasCollection<FilmReview> {
+public class FilmReviewCollection extends PagedCollection<FilmReview> {
 
     protected final Integer filmId;
 
-    public FilmReviewCollection(Iterable<FilmReview> resources, Integer filmId) {
-        super("reviews", resources);
+    public FilmReviewCollection(Page<FilmReview> page, Integer filmId) {
+        super("reviews", page);
         this.filmId = filmId;
     }
 
-    public FilmReviewCollection(Iterable<FilmReview> resources) {
-        this(resources, null);
+    public FilmReviewCollection(Page<FilmReview> page) {
+        this(page, null);
     }
 
     @Override
-    protected Collection<Link> getLinks() {
+    protected Link getPreviousLink() {
+        return linkTo(methodOn(FilmReviewController.class).getFilmReviews(null, getPageNumber() - 1, getPageSize())).withRel("previous").expand();
+    }
+
+    @Override
+    protected Link getNextLink() {
+        return linkTo(methodOn(FilmReviewController.class).getFilmReviews(null, getPageNumber() + 1, getPageSize())).withRel("next").expand();
+    }
+
+    @Override
+    protected Collection<Link> getCollectionLinks() {
         if (filmId != null) {
             return List.of(
-                    linkTo(methodOn(FilmReviewController.class).getFilmReviews(filmId)).withSelfRel().expand(),
+                    linkTo(methodOn(FilmReviewController.class).getFilmReviews(filmId, getPageNumber(), getPageSize())).withSelfRel().expand(),
                     linkTo(methodOn(FilmReviewController.class).getReviewOfFilm(filmId, null)).withRel("find")
             );
         } else {
             return List.of(
                     linkTo(methodOn(FilmReviewController.class).getReview(null)).withRel("find"),
-                    linkTo(methodOn(FilmReviewController.class).getAllReviews()).withSelfRel().expand()
+                    linkTo(methodOn(FilmReviewController.class).getAllReviews(null, null)).withSelfRel().expand()
             );
         }
     }
