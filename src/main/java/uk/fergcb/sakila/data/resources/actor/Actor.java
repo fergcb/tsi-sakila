@@ -43,8 +43,8 @@ public class Actor extends HateoasResource {
     public Actor() {}
 
     public void updateFromDTO(ActorDTO actorDTO) {
-        this.firstName = actorDTO.getFirstName().orElse(firstName);
-        this.lastName = actorDTO.getLastName().orElse(lastName);
+        this.setFirstName(actorDTO.getFirstName().orElse(firstName));
+        this.setLastName(actorDTO.getLastName().orElse(lastName));
     }
 
     public int getActorId() {

@@ -43,12 +43,12 @@ public class FilmReview extends HateoasResource {
     public FilmReview() {}
 
     public void updateFromDTO(FilmReviewDTO filmReviewDTO) {
-        this.filmId = filmReviewDTO.getFilmId().orElse(filmId);
-        this.userId = filmReviewDTO.getUserId().orElse(userId);
-        this.author = filmReviewDTO.getAuthor().orElse(author);
-        this.title = filmReviewDTO.getTitle().orElse(title);
-        this.rating = filmReviewDTO.getRating().orElse(rating);
-        this.text = filmReviewDTO.getText().orElse(text);
+        this.setFilmId(filmReviewDTO.getFilmId().orElse(filmId));
+        this.setUserId(filmReviewDTO.getUserId().orElse(userId));
+        this.setAuthor(filmReviewDTO.getAuthor().orElse(author));
+        this.setTitle(filmReviewDTO.getTitle().orElse(title));
+        this.setRating(filmReviewDTO.getRating().orElse(rating));
+        this.setText(filmReviewDTO.getText().orElse(text));
     }
 
     public Integer getFilmReviewId() {
@@ -61,6 +61,10 @@ public class FilmReview extends HateoasResource {
 
     public void setFilmId(Integer filmId) {
         this.filmId = filmId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getAuthor() {

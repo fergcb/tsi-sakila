@@ -78,13 +78,13 @@ public class Film extends HateoasResource {
     public Film() {}
 
     public void updateFromDTO(FilmDTO filmDTO) {
-        this.title = filmDTO.getTitle().orElse(title);
-        this.description = filmDTO.getDescription().orElse(description);
-        this.releaseYear = filmDTO.getReleaseYear().orElse(releaseYear);
-        this.languageId = filmDTO.getLanguageId().orElse(languageId);
-        this.originalLanguageId = filmDTO.getOriginalLanguageId().orElse(originalLanguageId);
-        this.length = filmDTO.getLength().orElse(length);
-        this.rating = filmDTO.getRating().orElse(rating);
+        this.setTitle(filmDTO.getTitle().orElse(title));
+        this.setDescription(filmDTO.getDescription().orElse(description));
+        this.setReleaseYear(filmDTO.getReleaseYear().orElse(releaseYear));
+        this.setLanguageId(filmDTO.getLanguageId().orElse(languageId));
+        this.setOriginalLanguageId(filmDTO.getOriginalLanguageId().orElse(originalLanguageId));
+        this.setLength(filmDTO.getLength().orElse(length));
+        this.setRating(filmDTO.getRating().orElse(rating));
     }
 
     public Integer getFilmId() {
