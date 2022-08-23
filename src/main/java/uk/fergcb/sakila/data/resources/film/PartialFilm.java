@@ -16,7 +16,7 @@ public class PartialFilm extends HateoasResource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="film_id")
-    private int filmId;
+    private Integer filmId;
 
     @Column(name="title")
     private String title;
@@ -27,11 +27,11 @@ public class PartialFilm extends HateoasResource {
     @Column(name="release_year")
     private Integer releaseYear;
 
-    public int getFilmId() {
+    public Integer getFilmId() {
         return filmId;
     }
 
-    public void setFilmId(int filmId) {
+    public void setFilmId(Integer filmId) {
         this.filmId = filmId;
     }
 

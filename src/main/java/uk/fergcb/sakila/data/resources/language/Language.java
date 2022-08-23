@@ -8,7 +8,7 @@ public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="language_id")
-    private int languageId;
+    private Integer languageId;
 
     @Column(name="name")
     private String name;
@@ -20,14 +20,14 @@ public class Language {
     public Language() {}
 
     public void updateFromDTO(LanguageDTO languageDTO) {
-        this.name = languageDTO.getName().orElse(name);
+        this.setName(languageDTO.getName().orElse(name));
     }
 
-    public int getLanguageId() {
+    public Integer getLanguageId() {
         return languageId;
     }
 
-    public void setLanguageId(int languageId) {
+    public void setLanguageId(Integer languageId) {
         this.languageId = languageId;
     }
 

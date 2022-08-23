@@ -17,7 +17,7 @@ public class PartialActor extends HateoasResource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="actor_id")
-    private int actorId;
+    private Integer actorId;
 
     @Transient
     @Column(name="first_name")
@@ -30,11 +30,11 @@ public class PartialActor extends HateoasResource {
     @Formula("concat(first_name, ' ', last_name)")
     private String fullName;
 
-    public int getActorId() {
+    public Integer getActorId() {
         return actorId;
     }
 
-    public void setActorId(int actorId) {
+    public void setActorId(Integer actorId) {
         this.actorId = actorId;
     }
 

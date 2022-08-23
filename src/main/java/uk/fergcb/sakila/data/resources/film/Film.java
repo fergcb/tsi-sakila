@@ -91,7 +91,7 @@ public class Film extends HateoasResource {
         return filmId;
     }
 
-    public void setFilmId(int filmId) {
+    public void setFilmId(Integer filmId) {
         this.filmId = filmId;
     }
 
