@@ -2,9 +2,7 @@ package uk.fergcb.sakila.data.resources.actor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.hateoas.Link;
-import uk.fergcb.sakila.data.hateoas.HateoasCollection;
 import uk.fergcb.sakila.data.hateoas.PagedCollection;
-import uk.fergcb.sakila.data.resources.film.FilmController;
 
 import java.util.Collection;
 import java.util.List;

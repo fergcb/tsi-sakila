@@ -4,9 +4,9 @@ import org.springframework.hateoas.Link;
 import uk.fergcb.sakila.data.hateoas.HateoasResource;
 import uk.fergcb.sakila.data.resources.actor.PartialActor;
 import uk.fergcb.sakila.data.resources.category.Category;
-import uk.fergcb.sakila.data.resources.language.Language;
 import uk.fergcb.sakila.data.resources.filmreview.FilmReview;
 import uk.fergcb.sakila.data.resources.filmreview.FilmReviewController;
+import uk.fergcb.sakila.data.resources.language.Language;
 
 import javax.persistence.*;
 import java.util.Collection;
