@@ -17,12 +17,12 @@ public class FilmCollection extends PagedCollection<Film> {
     }
 
     @Override
-    protected Link getNextLink() {
+    protected Link getPreviousLink() {
         return linkTo(methodOn(FilmController.class).getFilms(getPageNumber() - 1, getPageSize())).withRel("previous").expand();
     }
 
     @Override
-    protected Link getPreviousLink() {
+    protected Link getNextLink() {
         return linkTo(methodOn(FilmController.class).getFilms(getPageNumber() + 1, getPageSize())).withRel("next").expand();
     }
 
