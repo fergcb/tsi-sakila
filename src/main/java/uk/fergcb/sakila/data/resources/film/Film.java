@@ -22,7 +22,7 @@ public class Film extends HateoasResource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="film_id")
-    private int filmId;
+    private Integer filmId;
 
     @Column(name="title")
     private String title;
@@ -87,7 +87,7 @@ public class Film extends HateoasResource {
         this.rating = filmDTO.getRating().orElse(rating);
     }
 
-    public int getFilmId() {
+    public Integer getFilmId() {
         return filmId;
     }
 
