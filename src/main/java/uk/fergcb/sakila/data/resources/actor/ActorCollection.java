@@ -20,18 +20,18 @@ public class ActorCollection extends PagedCollection<Actor> {
 
     @Override
     protected Link getPreviousLink() {
-        return linkTo(methodOn(ActorController.class).getActors(null, getPageNumber() - 1, getPageSize())).withRel("previous").expand();
+        return linkTo(methodOn(ActorController.class).getActors(null, page.getNumber() - 1, page.getSize())).withRel("previous").expand();
     }
 
     @Override
     protected Link getNextLink() {
-        return linkTo(methodOn(ActorController.class).getActors(null, getPageNumber() + 1, getPageSize())).withRel("next").expand();
+        return linkTo(methodOn(ActorController.class).getActors(null, page.getNumber() + 1, page.getSize())).withRel("next").expand();
     }
 
     @Override
     protected Collection<Link> getCollectionLinks() {
         return List.of(
-                linkTo(methodOn(ActorController.class).getActors(null, getPageNumber(), getPageSize())).withSelfRel().expand(),
+                linkTo(methodOn(ActorController.class).getActors(null, page.getNumber(), page.getSize())).withSelfRel().expand(),
                 linkTo(methodOn(ActorController.class).getActorById(null)).withRel("find")
         );
     }

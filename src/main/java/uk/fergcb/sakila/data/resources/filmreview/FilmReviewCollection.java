@@ -27,19 +27,19 @@ public class FilmReviewCollection extends PagedCollection<FilmReview> {
 
     @Override
     protected Link getPreviousLink() {
-        return linkTo(methodOn(FilmReviewController.class).getFilmReviews(null, getPageNumber() - 1, getPageSize())).withRel("previous").expand();
+        return linkTo(methodOn(FilmReviewController.class).getFilmReviews(null, page.getNumber() - 1, page.getSize())).withRel("previous").expand();
     }
 
     @Override
     protected Link getNextLink() {
-        return linkTo(methodOn(FilmReviewController.class).getFilmReviews(null, getPageNumber() + 1, getPageSize())).withRel("next").expand();
+        return linkTo(methodOn(FilmReviewController.class).getFilmReviews(null, page.getNumber() + 1, page.getSize())).withRel("next").expand();
     }
 
     @Override
     protected Collection<Link> getCollectionLinks() {
         if (filmId != null) {
             return List.of(
-                    linkTo(methodOn(FilmReviewController.class).getFilmReviews(filmId, getPageNumber(), getPageSize())).withSelfRel().expand(),
+                    linkTo(methodOn(FilmReviewController.class).getFilmReviews(filmId, page.getNumber(), page.getSize())).withSelfRel().expand(),
                     linkTo(methodOn(FilmReviewController.class).getReviewOfFilm(filmId, null)).withRel("find")
             );
         } else {

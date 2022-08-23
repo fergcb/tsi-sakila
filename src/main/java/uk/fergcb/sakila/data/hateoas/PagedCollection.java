@@ -9,31 +9,15 @@ import java.util.List;
 
 public abstract class PagedCollection<T extends HateoasResource> extends HateoasCollection<T> {
 
-    private final Page<T> page;
+    protected final PaginationDetails page;
 
     protected PagedCollection(String name, Page<T> page) {
         super(name, page.getContent());
-        this.page = page;
+        this.page = new PaginationDetails(page);
     }
 
-    public Integer getPageNumber() {
-        return page.getNumber();
-    }
-
-    public Integer getCount() {
-        return page.getNumberOfElements();
-    }
-
-    public Integer getPageSize() {
-        return page.getSize();
-    }
-
-    public Boolean getHasNext() {
-        return page.hasNext();
-    }
-
-    public Boolean getHasPrevious() {
-        return page.hasPrevious();
+    public PaginationDetails getPage() {
+        return page;
     }
 
     protected abstract Link getNextLink();
@@ -44,8 +28,8 @@ public abstract class PagedCollection<T extends HateoasResource> extends Hateoas
     protected Collection<Link> getLinks() {
         final List<Link> links = new ArrayList<>(getCollectionLinks());
 
-        if (getHasNext()) links.add(getNextLink());
-        if (getHasPrevious()) links.add(getPreviousLink());
+        if (page.getHasNext()) links.add(getNextLink());
+        if (page.getHasPrevious()) links.add(getPreviousLink());
 
         return links;
     }

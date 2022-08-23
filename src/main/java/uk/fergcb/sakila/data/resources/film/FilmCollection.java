@@ -18,18 +18,18 @@ public class FilmCollection extends PagedCollection<Film> {
 
     @Override
     protected Link getPreviousLink() {
-        return linkTo(methodOn(FilmController.class).getFilms(getPageNumber() - 1, getPageSize())).withRel("previous").expand();
+        return linkTo(methodOn(FilmController.class).getFilms(page.getNumber() - 1, page.getSize())).withRel("previous").expand();
     }
 
     @Override
     protected Link getNextLink() {
-        return linkTo(methodOn(FilmController.class).getFilms(getPageNumber() + 1, getPageSize())).withRel("next").expand();
+        return linkTo(methodOn(FilmController.class).getFilms(page.getNumber() + 1, page.getSize())).withRel("next").expand();
     }
 
     @Override
     protected Collection<Link> getCollectionLinks() {
         return List.of(
-                linkTo(methodOn(FilmController.class).getFilms(getPageNumber(), getPageSize())).withSelfRel().expand(),
+                linkTo(methodOn(FilmController.class).getFilms(page.getNumber(), page.getSize())).withSelfRel().expand(),
                 linkTo(methodOn(FilmController.class).getFilmById(null)).withRel("find")
         );
     }
