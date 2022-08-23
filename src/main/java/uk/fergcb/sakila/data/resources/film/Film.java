@@ -155,10 +155,6 @@ public class Film extends HateoasResource {
         return cast;
     }
 
-    public void setCast(List<PartialActor> cast) {
-        this.cast = cast;
-    }
-
     public List<Category> getCategories() {
         return categories;
     }
