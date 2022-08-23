@@ -44,6 +44,17 @@ public class FilmService implements IFilmService {
     }
 
     /**
+     * Read all Film resources from the collection where the title matches a given partial title
+     *
+     * @return an iterable collection of Films
+     */
+    @Override
+    public FilmCollection readFilmsByTitle(String title, Pageable pageable) {
+        Page<Film> page = filmRepository.findByTitleContainingIgnoreCase(title, pageable);
+        return new FilmCollection(page, title);
+    }
+
+    /**
      * Read a single Film from the collection, if it exists
      * @param id The unique ID of the Film resource to read
      * @return The Film entity, or an empty Optional

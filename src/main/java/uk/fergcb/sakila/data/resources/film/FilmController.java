@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static org.apache.logging.log4j.util.Strings.isEmpty;
+
 @RestController
 @RequestMapping("/films")
 public class FilmController {
@@ -23,6 +25,7 @@ public class FilmController {
 
     @GetMapping
     public @ResponseBody FilmCollection getFilms(
+            @RequestParam(required = false) String title,
             @RequestParam(required = false) Integer page,
             @RequestParam(required = false) Integer size
     ) {
@@ -31,7 +34,11 @@ public class FilmController {
                 size != null ? size : 20
         );
 
-        return filmService.readFilms(pageable);
+        if (isEmpty(title)) {
+            return filmService.readFilms(pageable);
+        }
+
+        return filmService.readFilmsByTitle(title, pageable);
     }
 
     @GetMapping("/{id}")

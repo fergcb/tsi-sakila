@@ -12,24 +12,31 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 public class FilmCollection extends PagedCollection<Film> {
 
-    public FilmCollection(Page<Film> page) {
+    private final String title;
+
+    public FilmCollection(Page<Film> page, String title) {
         super("films", page);
+        this.title = title;
+    }
+
+    public FilmCollection(Page<Film> page) {
+        this(page, null);
     }
 
     @Override
     protected Link getPreviousLink() {
-        return linkTo(methodOn(FilmController.class).getFilms(page.getNumber() - 1, page.getSize())).withRel("previous").expand();
+        return linkTo(methodOn(FilmController.class).getFilms(title, page.getNumber() - 1, page.getSize())).withRel("previous").expand();
     }
 
     @Override
     protected Link getNextLink() {
-        return linkTo(methodOn(FilmController.class).getFilms(page.getNumber() + 1, page.getSize())).withRel("next").expand();
+        return linkTo(methodOn(FilmController.class).getFilms(title, page.getNumber() + 1, page.getSize())).withRel("next").expand();
     }
 
     @Override
     protected Collection<Link> getCollectionLinks() {
         return List.of(
-                linkTo(methodOn(FilmController.class).getFilms(page.getNumber(), page.getSize())).withSelfRel().expand(),
+                linkTo(methodOn(FilmController.class).getFilms(title, page.getNumber(), page.getSize())).withSelfRel().expand(),
                 linkTo(methodOn(FilmController.class).getFilmById(null)).withRel("find")
         );
     }
