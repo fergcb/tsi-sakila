@@ -18,7 +18,7 @@ public class Actor extends HateoasResource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="actor_id")
-    protected int actorId;
+    protected Integer actorId;
 
     @Column(name="first_name")
     protected String firstName;
@@ -47,11 +47,11 @@ public class Actor extends HateoasResource {
         this.setLastName(actorDTO.getLastName().orElse(lastName));
     }
 
-    public int getActorId() {
+    public Integer getActorId() {
         return actorId;
     }
 
-    public void setActorId(int actorId) {
+    public void setActorId(Integer actorId) {
         this.actorId = actorId;
     }
 
