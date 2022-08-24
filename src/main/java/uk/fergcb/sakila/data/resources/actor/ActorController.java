@@ -55,9 +55,8 @@ public class ActorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Actor> deleteActorById(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteActorById(@PathVariable Integer id) {
         actorService.deleteActor(id);
-        Actor actor = actorService.readActor(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(actor);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
