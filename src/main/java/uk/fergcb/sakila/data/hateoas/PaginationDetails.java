@@ -30,11 +30,11 @@ public class PaginationDetails {
         return page.getTotalElements();
     }
 
-    public Boolean getHasNext() {
+    public boolean getHasNext() {
         return page.hasNext();
     }
 
-    public Boolean getHasPrevious() {
+    public boolean getHasPrevious() {
         return page.hasPrevious();
     }
 
