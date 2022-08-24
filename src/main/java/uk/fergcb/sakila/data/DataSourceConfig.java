@@ -14,8 +14,6 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceConfig.class);
-
     @Bean
     public DataSource getDataSource() {
         DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
@@ -31,8 +29,6 @@ public class DataSourceConfig {
         dataSourceBuilder.url(url);
         dataSourceBuilder.username(username);
         dataSourceBuilder.password(password);
-
-        LOGGER.info("Using data source config:\n  url={}\n  username={}\n  password={}", url, username, password);
 
         return dataSourceBuilder.build();
     }
