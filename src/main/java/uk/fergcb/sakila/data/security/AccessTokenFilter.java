@@ -51,6 +51,11 @@ public class AccessTokenFilter extends OncePerRequestFilter {
 
         User user = validateToken(accessToken);
 
+        if (user == null) {
+            chain.doFilter(req, res);
+            return;
+        }
+
         // Authenticate the request
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                 user.getUsername(),
