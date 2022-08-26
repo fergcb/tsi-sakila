@@ -19,7 +19,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: artifact
-          path: target/sakila-api.jar
+          path: target/sakila-data.jar
   deploy:
     needs: build
     name: Deploy
