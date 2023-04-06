@@ -15,18 +15,14 @@ public class OptionsController {
 
     private static class Options extends RepresentationModel<Options> {}
 
-    @RequestMapping(
-        method = {
-            RequestMethod.OPTIONS,
-            RequestMethod.GET
-        }
-    )
+    @RequestMapping(method = { RequestMethod.OPTIONS, RequestMethod.GET })
     public Options getOptions() {
-        Options options = new Options();
+        final Options options = new Options();
 
         options.add(linkTo(methodOn(ActorController.class).getActors(null, null, null)).withRel("actors").expand());
         options.add(linkTo(methodOn(FilmController.class).getFilms(null, null, null)).withRel("films").expand());
 
         return options;
     }
+
 }

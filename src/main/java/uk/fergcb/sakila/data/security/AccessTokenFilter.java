@@ -49,7 +49,7 @@ public class AccessTokenFilter extends OncePerRequestFilter {
         // Extract access token from Authorization header
         final String accessToken = header.substring(PREFIX.length()).trim();
 
-        User user = validateToken(accessToken);
+        final User user = validateToken(accessToken);
 
         if (user == null) {
             chain.doFilter(req, res);
@@ -71,18 +71,17 @@ public class AccessTokenFilter extends OncePerRequestFilter {
     private User validateToken(String accessToken) {
         final String url = "https://sakila-auth.fergcb.uk/sessions/validate";
 
-
-        HttpHeaders headers = new HttpHeaders();
+        final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-        Map<String, String> body = Map.of(
+        final Map<String, String> body = Map.of(
                 "accessToken", accessToken
         );
 
-        HttpEntity<Map<String, String>> request = new HttpEntity<>(body, headers);
+        final HttpEntity<Map<String, String>> request = new HttpEntity<>(body, headers);
 
-        ResponseEntity<User> res = restTemplate.postForEntity(url, request, User.class);
+        final ResponseEntity<User> res = restTemplate.postForEntity(url, request, User.class);
 
         if (res.getStatusCode() == HttpStatus.OK) {
             return res.getBody();

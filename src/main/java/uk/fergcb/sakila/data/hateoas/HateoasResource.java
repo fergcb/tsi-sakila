@@ -13,13 +13,9 @@ public abstract class HateoasResource {
     protected abstract Collection<Link> getLinks();
 
     public Map<String, LinkContent> get_links() {
-        Map<String, LinkContent> linkMap = new HashMap<>();
-        getLinks().forEach(link -> {
-            linkMap.put(
-                    link.getRel().value(),
-                    new LinkContent(link.getHref())
-            );
-        });
+        final Map<String, LinkContent> linkMap = new HashMap<>();
+        getLinks().forEach(link ->
+            linkMap.put(link.getRel().value(), new LinkContent(link.getHref())));
         return linkMap;
     }
 

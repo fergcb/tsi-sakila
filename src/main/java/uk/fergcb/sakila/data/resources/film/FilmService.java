@@ -39,7 +39,7 @@ public class FilmService implements IFilmService {
      */
     @Override
     public FilmCollection readFilms(Pageable pageable) {
-        Page<Film> page = filmRepository.findAll(pageable);
+        final Page<Film> page = filmRepository.findAll(pageable);
         return new FilmCollection(page);
     }
 
@@ -50,7 +50,7 @@ public class FilmService implements IFilmService {
      */
     @Override
     public FilmCollection readFilmsByTitle(String title, Pageable pageable) {
-        Page<Film> page = filmRepository.findByTitleContainingIgnoreCase(title, pageable);
+        final Page<Film> page = filmRepository.findByTitleContainingIgnoreCase(title, pageable);
         return new FilmCollection(page, title);
     }
 
@@ -74,8 +74,8 @@ public class FilmService implements IFilmService {
 
     @Override
     public Integer createFilm(FilmDTO filmDTO) {
-        Film film = filmRepository.save(new Film(filmDTO));
-        Integer filmId = film.getFilmId();
+        final Film film = filmRepository.save(new Film(filmDTO));
+        final Integer filmId = film.getFilmId();
 
         // Create link table entries for categories and actors
         createFilmCategories(filmId, filmDTO.getCategoryIds());
@@ -92,7 +92,7 @@ public class FilmService implements IFilmService {
         if (categoryIds == null) return;
 
         // Create the FilmCategory entities
-        List<FilmCategory> filmCategories = categoryIds
+        final List<FilmCategory> filmCategories = categoryIds
                 .stream()
                 .map(categoryId ->  new FilmCategory(filmId, categoryId))
                 .toList();
@@ -110,7 +110,7 @@ public class FilmService implements IFilmService {
         if (actorIds == null) return;
 
         // Create the FilmActor entities
-        List<FilmActor> filmActors = actorIds
+        final List<FilmActor> filmActors = actorIds
                 .stream()
                 .map(actorId ->  new FilmActor(filmId, actorId))
                 .toList();
@@ -126,7 +126,7 @@ public class FilmService implements IFilmService {
      */
     @Override
     public void updateFilm(Integer id, FilmDTO filmDTO) {
-        Film film = filmRepository
+        final Film film = filmRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No film exists with that id."));
 
@@ -147,7 +147,7 @@ public class FilmService implements IFilmService {
     private void updateFilmCategories(Integer filmId, Set<Integer> categoryIds) {
         if (categoryIds == null) return;
 
-        Set<FilmCategory> existingCategoryLinks = filmCategoryRepository.findByFilmCategoryKeyFilmId(filmId);
+        final Set<FilmCategory> existingCategoryLinks = filmCategoryRepository.findByFilmCategoryKeyFilmId(filmId);
 
         deleteUnwantedFilmCategories(categoryIds, existingCategoryLinks);
         createNewFilmCategories(filmId, categoryIds, existingCategoryLinks);
@@ -172,7 +172,7 @@ public class FilmService implements IFilmService {
      */
     private void createNewFilmCategories(Integer filmId, Set<Integer> categoryIds, Set<FilmCategory> existingCategoryLinks) {
         // Get a list of category IDs that already have FilmCategory records
-        List<Integer> linkedCategories = existingCategoryLinks.stream()
+        final List<Integer> linkedCategories = existingCategoryLinks.stream()
                 .map(filmCategory -> filmCategory.getFilmCategoryKey().getCategoryId())
                 .toList();
 
@@ -191,7 +191,7 @@ public class FilmService implements IFilmService {
     private void updateFilmActors(Integer filmId, Set<Integer> actorIds) {
         if (actorIds == null) return;
 
-        Set<FilmActor> existingActorLinks = filmActorRepository.findByFilmActorKeyFilmId(filmId);
+        final Set<FilmActor> existingActorLinks = filmActorRepository.findByFilmActorKeyFilmId(filmId);
 
         deleteUnwantedFilmActors(actorIds, existingActorLinks);
         createNewFilmActors(filmId, actorIds, existingActorLinks);
@@ -216,7 +216,7 @@ public class FilmService implements IFilmService {
      */
     private void createNewFilmActors(Integer filmId, Set<Integer> actorIds, Set<FilmActor> existingActorLinks) {
         // Get a list of actor IDs that already have FilmActor records
-        List<Integer> linkedActors = existingActorLinks.stream()
+        final List<Integer> linkedActors = existingActorLinks.stream()
                 .map(filmActor -> filmActor.getFilmActorKey().getActorId())
                 .toList();
 

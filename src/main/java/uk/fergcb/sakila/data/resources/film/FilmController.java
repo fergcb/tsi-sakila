@@ -18,8 +18,8 @@ public class FilmController {
 
     @PostMapping
     public ResponseEntity<Film> createFilm(@RequestBody FilmDTO filmDTO) {
-        Integer id = filmService.createFilm(filmDTO);
-        Film film = filmService.readFilm(id);
+        final Integer id = filmService.createFilm(filmDTO);
+        final Film film = filmService.readFilm(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(film);
     }
 
@@ -34,9 +34,7 @@ public class FilmController {
                 size != null ? size : 20
         );
 
-        if (isEmpty(title)) {
-            return filmService.readFilms(pageable);
-        }
+        if (isEmpty(title)) return filmService.readFilms(pageable);
 
         return filmService.readFilmsByTitle(title, pageable);
     }
@@ -49,7 +47,7 @@ public class FilmController {
     @PatchMapping("/{id}")
     public ResponseEntity<Film> updateFilmById(@PathVariable Integer id, @RequestBody FilmDTO filmDTO) {
         filmService.updateFilm(id, filmDTO);
-        Film film = filmService.readFilm(id);
+        final Film film = filmService.readFilm(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(film);
     }
 

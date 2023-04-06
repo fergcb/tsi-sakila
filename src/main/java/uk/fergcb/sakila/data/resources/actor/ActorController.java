@@ -29,16 +29,15 @@ public class ActorController {
                 size != null ? size : 20
         );
 
-        if (name != null) {
-            return actorService.readActorsByName(name, pageable);
-        }
+        if (name != null) return actorService.readActorsByName(name, pageable);
+
         return actorService.readActors(pageable);
     }
 
     @PostMapping
     public ResponseEntity<Actor> createActor(@RequestBody ActorDTO actorDTO) {
-        Integer id = actorService.createActor(actorDTO);
-        Actor actor = actorService.readActor(id);
+        final Integer id = actorService.createActor(actorDTO);
+        final Actor actor = actorService.readActor(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(actor);
     }
 
@@ -50,7 +49,7 @@ public class ActorController {
     @PatchMapping("/{id}")
     public ResponseEntity<Actor> updateActorById(@PathVariable Integer id, @RequestBody ActorDTO actorDTO) {
         actorService.updateActor(id, actorDTO);
-        Actor actor = actorService.readActor(id);
+        final Actor actor = actorService.readActor(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(actor);
     }
 

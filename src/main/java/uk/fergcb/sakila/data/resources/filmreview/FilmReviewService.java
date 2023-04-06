@@ -51,7 +51,7 @@ public class FilmReviewService {
      * @return The ID of the created FilmReview record
      */
     public Integer createActor(FilmReviewDTO filmReviewDTO) {
-        FilmReview filmReview = filmReviewRepository.save(new FilmReview(filmReviewDTO));
+        final FilmReview filmReview = filmReviewRepository.save(new FilmReview(filmReviewDTO));
         return filmReview.getFilmReviewId();
     }
 
@@ -61,11 +61,9 @@ public class FilmReviewService {
      * @param filmReviewDTO The data to overwrite the FilmReview with
      */
     public void updateActor(Integer id, FilmReviewDTO filmReviewDTO) {
-        FilmReview filmReview = filmReviewRepository.findById(id)
+        final FilmReview filmReview = filmReviewRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No FilmReview exists with that id."));
-
         filmReview.updateFromDTO(filmReviewDTO);
-
         filmReviewRepository.save(filmReview);
     }
 

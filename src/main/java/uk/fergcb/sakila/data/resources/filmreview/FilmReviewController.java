@@ -44,6 +44,7 @@ public class FilmReviewController {
                 page != null ? page : 0,
                 size != null ? size : 20
         );
+
         return new FilmReviewCollection(filmReviewService.readReviewsForFilm(filmId, pageable), filmId);
     }
 

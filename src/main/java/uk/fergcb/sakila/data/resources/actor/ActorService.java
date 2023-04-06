@@ -52,7 +52,7 @@ public class ActorService implements IActorService {
      */
     @Override
     public Integer createActor(ActorDTO actorDTO) {
-        Actor actor = actorRepository.save(new Actor(actorDTO));
+        final Actor actor = actorRepository.save(new Actor(actorDTO));
         return actor.getActorId();
     }
 
@@ -63,11 +63,9 @@ public class ActorService implements IActorService {
      */
     @Override
     public void updateActor(Integer id, ActorDTO actorDTO) {
-        Actor actor = actorRepository.findById(id)
+        final Actor actor = actorRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No actor exists with that id."));
-
         actor.updateFromDTO(actorDTO);
-
         actorRepository.save(actor);
     }
 
